@@ -15,6 +15,7 @@ class PiecewiseLinearComplex < CellComplex
   end
   
   def add(bdy_or_coords = [])
+    
     boundary = bdy_or_coords.first.kind_of?(Fixnum) ? [] : bdy_or_coords
     cell = super(boundary)
     cell.coords = bdy_or_coords.clone if boundary.empty?

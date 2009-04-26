@@ -1,3 +1,9 @@
+# The basic Cell Complex data structure is a highly versatile way of storing
+# an arbitrary complex.  It assumes that no two cells of any dimension share
+# more than one face.  It permits one to walk around the parts of the complex
+# that are boundaries of higher dimensional cells.  
+
+# A basic *Cell* has a dimension and some complex that it belongs to.
 class Cell
   include Comparable
   attr_reader :dim, :complex
@@ -8,6 +14,8 @@ class Cell
     @complex = complex
   end
   
+  # Cells are ordered increasing by dimension.  Two cells with the same
+  # dimension are arbitrarily and consistently ordered.
   def <=>(other)
     return 1 if other == nil
     @dim == other.dim ? self.object_id <=> other.object_id : @dim <=> other.dim
@@ -23,6 +31,9 @@ class Cell
 
 end
 
+# A *CellTuple* is an ordered list of cells, one for each dimension,
+# representing a handle into a complex.  The tuple can also be viewed as a
+# simplex of the barycentric subdivision of a complex.
 class CellTuple
   include Enumerable
   attr_reader :dim, :tuple, :complex
@@ -34,7 +45,7 @@ class CellTuple
     @complex = complex
     @dim = @tuple.length-1
     if complex and complex.dim != @dim
-      raise "wrong number of cells (#{@dim + 1} for a tuple in this complex (dim = #{complex.dim})"
+      raise "wrong number of cells (#{@dim + 1}) for a tuple in this complex (dim = #{complex.dim})"
     end
   end
 
@@ -60,12 +71,9 @@ class CellTuple
 
 end
 
-## CellComplex
-##
-## This class represents a cell complex where the incidence lattice
-## has the diamond property.  It implements a switch operator that
-## can be used with cell tuple objects.  
- 
+# A *CellComplex* represents a collection of cells and their incidence
+# relationships.  It implements a switch operator that can be used with cell 
+# tuple objects.  
 class CellComplex
   attr_reader :dim, :cells, :lower, :upper, :empty_face, :full_face
 

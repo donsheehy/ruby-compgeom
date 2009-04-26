@@ -1,0 +1,3 @@
+The Ruby Comutational Geometry Library
+
+The RCG library is a tool for rapidly prototyping geometric algorithms in Ruby.  The goal is to optimize useage of the algorithms reasearcher's time rather than his computer's.
