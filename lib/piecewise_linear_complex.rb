@@ -6,6 +6,28 @@ class Vertex < Cell
   def initialize(complex)
     super(0, complex)
   end
+  
+  def x
+    coords[0]
+  end
+  
+  def y
+    coords[1]
+  end
+  
+  def [](k)
+    coords[k]
+  end
+end
+
+class Cell  
+  def head
+    self.down[0]
+  end
+  
+  def tail
+    self.down[1]
+  end
 end
 
 class PiecewiseLinearComplex < CellComplex

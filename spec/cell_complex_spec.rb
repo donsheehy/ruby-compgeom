@@ -1,5 +1,4 @@
-require 'rubygems'
-require 'spec'
+require File.dirname(__FILE__) + '/spec_helper'
 require 'cell_complex'
 
 describe Cell do
@@ -23,7 +22,6 @@ describe Cell do
     empty_face = p[1].down()
     empty_face.size.should == 1
     empty_face.first.dim.should == -1    
-    
   end
   
   it "should expose its coboundary (with offsets)" do    

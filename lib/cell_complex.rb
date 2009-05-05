@@ -29,6 +29,10 @@ class Cell
     @complex.down(self, offset)
   end
 
+  def faces(dim = 0)
+    @complex.down(self, @dim - dim)
+  end
+
 end
 
 # A *CellTuple* is an ordered list of cells, one for each dimension,
@@ -175,7 +179,8 @@ class CellComplex
   ## retrieve the cells lower than the parameter cell
   ## which are offset dimensions lower (offset >= 0)
   def down(cell, offset = 1)
-    @lower[cell].map {|f| offset == 1 ? f : self.down(f, offset-1)}.flatten.uniq
+    return [cell] if offset == 0
+    @lower[cell].map {|f| self.down(f, offset-1)}.flatten.uniq
   end
 
   ## up
